@@ -5,7 +5,7 @@ module.exports = {
     version: "1.1",
     author: "dipto",
     countDown: 5,
-    role: 0,
+    role: 2,
     description: "PROFILE image",
     category: "image",
     guide: { en: "{pn} @tag or userID or reply to a message or provide a Facebook URL" }
