@@ -4,31 +4,31 @@ const path = require("path");
 
 module.exports = {
 	config: {
-		name: "os",
+		name: "ariyan",
 		version: "1.0",
-		author: "siyam8881",
+		author: "Gookk",
 		countDown: 5,
 		role: 2,
 		shortDescription: "sarcasm",
-		longDescription: "Responds with random media when someone says 'acs",
+		longDescription: "Responds with random media when someone says 'ariyan",
 		category: "reply",
 	},
 
 	onStart: async function () {},
 
 	onChat: async function ({ event, message }) {
-		if (event.body && event.body.toLowerCase() === "os") {
+		if (event.body && event.body.toLowerCase() === "ariyan") {
 			const mediaLinks = [
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/2bplav.jpg",
-				"https://files.catbox.moe/f39t82.jpg",
-				"https://files.catbox.moe/orj1ec.jpg",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/v03s7j.jpg",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/evhfl1.jpg",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/v03s7j.jpg"
+				"https://files.catbox.moe/ckn7se.mp4",
+				"https://files.catbox.moe/3ykiwi.mp4",
+				"https://files.catbox.moe/h8hd9w.mp4",
+				"https://files.catbox.moe/99qnah.mp4",
+				"https://files.catbox.moe/ff8pqi.mp4",
+				"https://files.catbox.moe/6ygb47.mp4",
+				"https://files.catbox.moe/ff8pqi.mp4",
+				"https://files.catbox.moe/6ygb47.mp4",
+				"https://files.catbox.moe/h8hd9w.mp4",
+				"https://files.catbox.moe/99qnah.mp4"
 			];
 
 			const randomLink = mediaLinks[Math.floor(Math.random() * mediaLinks.length)];
@@ -40,7 +40,7 @@ module.exports = {
 				fs.writeFileSync(filePath, Buffer.from(response.data));
 
 				await message.reply({
-					body: "-!X-z⁶²M?\n\n々𝗪͜͡𝗛𝗢 -?  🎭👑\n\n\n\n- 々𝗦𝗜𝗬͜͡⁴𝗠 𝗩𝗜𝗥𝗨𝗦🚩🏴‍☠️📨\n\n____________☠️⚡",
+					body: "🚩🏴‍☠️✨\n\n🎭»̶̶͓͓̽̽̽𝗩𝗔𝗥𝗧𝗨𝗔𝗟𝄞⋆⃝𓊈‎𝗔𝗟L༄𝗠𝗔𝗦𝗧𝗘𝗥𝗠𝗜𝗡𝗗༆✾❥𝗕𝗢𝗫༄\n\n🪐⚡👀",
 					attachment: fs.createReadStream(filePath)
 				});
 			} catch (err) {
@@ -51,9 +51,4 @@ module.exports = {
 			}
 		}
 	}
-<<<<<<< HEAD
 };
-        
-=======
-};
->>>>>>> a02085c (save my changes)

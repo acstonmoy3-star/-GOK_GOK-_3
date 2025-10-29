@@ -25,6 +25,9 @@
     },
     "dhbc": {
       "reward": 1000
+    },
+    "antiout": {
+      "deltaNext": 5
     }
   },
   "envEvents": {

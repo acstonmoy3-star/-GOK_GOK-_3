@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
 	config: {
-		name: "os",
+		name: "opps",
 		version: "1.0",
 		author: "siyam8881",
 		countDown: 5,
@@ -17,12 +17,12 @@ module.exports = {
 	onStart: async function () {},
 
 	onChat: async function ({ event, message }) {
-		if (event.body && event.body.toLowerCase() === "os") {
+		if (event.body && event.body.toLowerCase() === "opps") {
 			const mediaLinks = [
 				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/2bplav.jpg",
-				"https://files.catbox.moe/f39t82.jpg",
-				"https://files.catbox.moe/orj1ec.jpg",
+				"https://files.catbox.moe/pnx17k.mp4",
+				"https://files.catbox.moe/pnx17k.mp4",
+				"https://files.catbox.moe/pnx17k.mp4",
 				"https://files.catbox.moe/pnx17k.mp4",
 				"https://files.catbox.moe/v03s7j.jpg",
 				"https://files.catbox.moe/pnx17k.mp4",
@@ -40,7 +40,7 @@ module.exports = {
 				fs.writeFileSync(filePath, Buffer.from(response.data));
 
 				await message.reply({
-					body: "-!X-z⁶²M?\n\n々𝗪͜͡𝗛𝗢 -?  🎭👑\n\n\n\n- 々𝗦𝗜𝗬͜͡⁴𝗠 𝗩𝗜𝗥𝗨𝗦🚩🏴‍☠️📨\n\n____________☠️⚡",
+					body: "🎭𝐀𝐓𝐓𝐀𝐂𝐊-𝐂𝐘𝐁𝐄𝐑-𝐒𝐄𝐂𝐔𝐑𝐈𝐓𝐘",
 					attachment: fs.createReadStream(filePath)
 				});
 			} catch (err) {
@@ -51,9 +51,4 @@ module.exports = {
 			}
 		}
 	}
-<<<<<<< HEAD
 };
-        
-=======
-};
->>>>>>> a02085c (save my changes)
