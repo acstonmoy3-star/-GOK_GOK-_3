@@ -1,110 +1,97 @@
-const { getTime, drive } = global.utils;
-if (!global.temp.welcomeEvent)
-	global.temp.welcomeEvent = {};
+const { getTime } = global.utils; // drive getFile এখন আর লাগবে না
+if (!global.temp.welcomeEvent) global.temp.welcomeEvent = {};
 
 module.exports = {
-	config: {
-		name: "welcome",
-		version: "1.8",
-		author: "NTKhang + Shiam",
-		category: "events"
-	},
+  config: {
+    name: "welcome",
+    version: "2.1",
+    author: "Shiam + NTKhang",
+    category: "events"
+  },
 
-	langs: {
-		en: {
-			session1: "morning",
-			session2: "noon",
-			session3: "afternoon",
-			session4: "evening",
-			welcomeMessage: `চলে এসেছি আমি নায়ক মিলন তোমাদের মাঝে ☄️📨✈️🧸🕸️👀\n\nকেমন আছো তোমরা 👀📨📌`,
-			multiple1: "you",
-			multiple2: "you guys",
-			defaultWelcomeMessage: `Hello {userName}.\nWelcome {multiple} to the chat group: {boxName}\nHave a nice {session} 😊`
-		}
-	},
+  langs: {
+    en: {
+      welcomeMessage: `চলে এসেছি আমি নায়ক মিলন তোমাদের মাঝে ☄️📨✈️🧸🕸️👀\n\nকেমন আছো তোমরা 👀📨📌`,
+      multiple1: "you",
+      multiple2: "you guys"
+    }
+  },
 
-	onStart: async ({ threadsData, message, event, api, getLang }) => {
-		if (event.logMessageType == "log:subscribe")
-			return async function () {
-				const hours = getTime("HH");
-				const { threadID } = event;
-				const { nickNameBot } = global.GoatBot.config;
-				const prefix = global.utils.getPrefix(threadID);
-				const dataAddedParticipants = event.logMessageData.addedParticipants;
+  onStart: async ({ threadsData, message, event, api, getLang }) => {
+    if (event.logMessageType !== "log:subscribe") return;
 
-				// যদি Bot Add হয়
-				if (dataAddedParticipants.some((item) => item.userFbId == api.getCurrentUserID())) {
-					if (nickNameBot)
-						api.changeNickname(nickNameBot, threadID, api.getCurrentUserID());
+    const { threadID } = event;
+    const { nickNameBot } = global.GoatBot.config;
+    const dataAddedParticipants = event.logMessageData.addedParticipants;
 
-					// ভিডিও URL (Catbox)
-					const videoUrl = "https://files.catbox.moe/gehwch.mp4"; // এখানে নিজের ভিডিও URL বসাও
+    // যদি Bot Add হয়
+    if (dataAddedParticipants.some(u => u.userFbId == api.getCurrentUserID())) {
+      if (nickNameBot) api.changeNickname(nickNameBot, threadID, api.getCurrentUserID());
 
-					return message.send({
-						body: getLang("welcomeMessage"),
-						attachment: await drive.getFile(videoUrl, "stream")
-					});
-				}
+      // Picture URL
+      const imageUrl = "https://i.ibb.co/yourimage.jpg"; // নিজের Picture URL বসাও
 
-				// যদি নতুন মেম্বার Join করে
-				if (!global.temp.welcomeEvent[threadID])
-					global.temp.welcomeEvent[threadID] = {
-						joinTimeout: null,
-						dataAddedParticipants: []
-					};
+      return message.send({
+        body: getLang("welcomeMessage"),
+        attachment: imageUrl
+      });
+    }
 
-				global.temp.welcomeEvent[threadID].dataAddedParticipants.push(...dataAddedParticipants);
-				clearTimeout(global.temp.welcomeEvent[threadID].joinTimeout);
+    // নতুন মেম্বার Join
+    if (!global.temp.welcomeEvent[threadID])
+      global.temp.welcomeEvent[threadID] = { joinTimeout: null, dataAddedParticipants: [] };
 
-				global.temp.welcomeEvent[threadID].joinTimeout = setTimeout(async function () {
-					const threadData = await threadsData.get(threadID);
-					if (threadData.settings.sendWelcomeMessage == false)
-						return;
-					const dataAddedParticipants = global.temp.welcomeEvent[threadID].dataAddedParticipants;
-					const dataBanned = threadData.data.banned_ban || [];
-					const threadName = threadData.threadName;
-					const userName = [],
-						mentions = [];
-					let multiple = false;
+    global.temp.welcomeEvent[threadID].dataAddedParticipants.push(...dataAddedParticipants);
+    clearTimeout(global.temp.welcomeEvent[threadID].joinTimeout);
 
-					if (dataAddedParticipants.length > 1)
-						multiple = true;
+    global.temp.welcomeEvent[threadID].joinTimeout = setTimeout(async () => {
+      const threadData = await threadsData.get(threadID);
+      if (threadData.settings.sendWelcomeMessage === false) return;
 
-					for (const user of dataAddedParticipants) {
-						if (dataBanned.some((item) => item.id == user.userFbId))
-							continue;
-						userName.push(user.fullName);
-						mentions.push({ tag: user.fullName, id: user.userFbId });
-					}
+      const dataAddedParticipants = global.temp.welcomeEvent[threadID].dataAddedParticipants;
+      const dataBanned = threadData.data.banned_ban || [];
+      const threadName = threadData.threadName;
+      const userName = [];
+      const mentions = [];
+      let multiple = false;
 
-					if (userName.length == 0) return;
-					let { welcomeMessage = getLang("defaultWelcomeMessage") } = threadData.data;
+      if (dataAddedParticipants.length > 1) multiple = true;
 
-					const form = { mentions: welcomeMessage.match(/\{userNameTag\}/g) ? mentions : null };
-					welcomeMessage = welcomeMessage
-						.replace(/\{userName\}|\{userNameTag\}/g, userName.join(", "))
-						.replace(/\{boxName\}|\{threadName\}/g, threadName)
-						.replace(/\{multiple\}/g, multiple ? getLang("multiple2") : getLang("multiple1"))
-						.replace(
-							/\{session\}/g,
-							hours <= 10 ? getLang("session1") :
-							hours <= 12 ? getLang("session2") :
-							hours <= 18 ? getLang("session3") : getLang("session4")
-						);
+      for (const user of dataAddedParticipants) {
+        if (dataBanned.some(item => item.id == user.userFbId)) continue;
+        userName.push(user.fullName);
+        mentions.push({ tag: user.fullName, id: user.userFbId });
+      }
 
-					form.body = welcomeMessage;
+      if (userName.length === 0) return;
 
-					if (threadData.data.welcomeAttachment) {
-						const files = threadData.data.welcomeAttachment;
-						const attachments = files.map(file => drive.getFile(file, "stream"));
-						form.attachment = (await Promise.allSettled(attachments))
-							.filter(({ status }) => status == "fulfilled")
-							.map(({ value }) => value);
-					}
+      let { welcomeMessage = getLang("welcomeMessage") } = threadData.data;
 
-					message.send(form);
-					delete global.temp.welcomeEvent[threadID];
-				}, 1500);
-			};
-	}
+      const form = { mentions: welcomeMessage.match(/\{userNameTag\}/g) ? mentions : null };
+      welcomeMessage = welcomeMessage
+        .replace(/\{userName\}|\{userNameTag\}/g, userName.join(", "))
+        .replace(/\{boxName\}|\{threadName\}/g, threadName)
+        .replace(/\{multiple\}/g, multiple ? getLang("multiple2") : getLang("multiple1"))
+        .replace(
+          /\{session\}/g,
+          (() => {
+            const hours = getTime("HH");
+            if (hours <= 10) return getLang("session1");
+            if (hours <= 12) return getLang("session2");
+            if (hours <= 18) return getLang("session3");
+            return getLang("session4");
+          })()
+        );
+
+      form.body = welcomeMessage;
+
+      // যদি কোনো Picture/Attachment থাকে
+      if (threadData.data.welcomeAttachment) {
+        form.attachment = threadData.data.welcomeAttachment; // Image URL/Attachment
+      }
+
+      message.send(form);
+      delete global.temp.welcomeEvent[threadID];
+    }, 1500);
+  }
 };
