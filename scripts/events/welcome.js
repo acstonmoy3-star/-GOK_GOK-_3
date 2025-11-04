@@ -29,7 +29,7 @@ module.exports = {
       if (nickNameBot) api.changeNickname(nickNameBot, threadID, api.getCurrentUserID());
 
       // Picture URL
-      const imageUrl = "https://i.ibb.co/yourimage.jpg"; // নিজের Picture URL বসাও
+      const imageUrl = "https://i.imgur.com/qT4LYPl.jpeg"; // নিজের Picture URL বসাও
 
       return message.send({
         body: getLang("welcomeMessage"),
