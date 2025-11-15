@@ -16,12 +16,12 @@ module.exports = {
   onStart: async function ({ api, event }) {
     try {
       const ownerInfo = {
-        name: '𓆩⟡ 👾𝗔𝗖𝗦 𝗦𝗜͜͡𝗬𝗔𝗠 𝗕𝗥𝗢 ⟡𓆪⚠️',
+        name: '𓆩⟡ 👾𝗔𝗖𝗦 𝗧𝗢𝗡𝗠𝗢𝗬 𝗕𝗥𝗢 ⟡𓆪⚠️',
         gender: '𝐌𝐀𝐋𝐄👾🌪️',
         nick: '𝗟𝗘͜͡𝗔𝗗𝗘𝗥 𝗩𝗔͜͡𝗜 ⚠️🏴‍☠'
       };
 
-      const videoUrl = 'https://drive.google.com/uc?export=download&id=1niWY1TqTsR26HQ5ZAQuPBuycNj3wzwBT';
+      const videoUrl = 'https://files.catbox.moe/iqajof.mp4';
       const tmpFolderPath = path.join(__dirname, 'tmp');
 
       if (!fs.existsSync(tmpFolderPath)) {
