@@ -8,7 +8,7 @@ module.exports = {
 		version: "1.0",
 		author: "siyam8881",
 		countDown: 5,
-		role: 2,
+		role: 1,
 		shortDescription: "sarcasm",
 		longDescription: "Responds with random media when someone says 'acs",
 		category: "reply",
@@ -17,18 +17,10 @@ module.exports = {
 	onStart: async function () {},
 
 	onChat: async function ({ event, message }) {
-		if (event.body && event.body.toLowerCase() === "opps") {
+		if (event.body && event.body.toLowerCase() === "Tonmoy") {
 			const mediaLinks = [
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/v03s7j.jpg",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/evhfl1.jpg",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/v03s7j.jpg"
+				"https://files.catbox.moe/mchw3a.mp4",
+	
 			];
 
 			const randomLink = mediaLinks[Math.floor(Math.random() * mediaLinks.length)];
