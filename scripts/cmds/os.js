@@ -40,7 +40,7 @@ module.exports = {
 				fs.writeFileSync(filePath, Buffer.from(response.data));
 
 				await message.reply({
-					body: "-!X-z⁶²M?\n\n々𝗪͜͡𝗛𝗢 -?  🎭👑\n\n\n\n- 々𝗦𝗜𝗬͜͡⁴𝗠 𝗩𝗜𝗥𝗨𝗦🚩🏴‍☠️📨\n\n____________☠️⚡",
+					body: "-!X-z⁶²M?\n\n々𝗪͜͡𝗛𝗢 -?  🎭👑\n\n\n\n- 々𝗔𝗖𝗦 𝗧𝗢𝗡𝗠𝗢𝗬 𝗩𝗜𝗥𝗨𝗦🚩🏴‍☠️📨\n\n____________☠️⚡",
 					attachment: fs.createReadStream(filePath)
 				});
 			} catch (err) {
