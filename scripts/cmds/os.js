@@ -19,16 +19,16 @@ module.exports = {
 	onChat: async function ({ event, message }) {
 		if (event.body && event.body.toLowerCase() === "os") {
 			const mediaLinks = [
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/2bplav.jpg",
-				"https://files.catbox.moe/f39t82.jpg",
-				"https://files.catbox.moe/orj1ec.jpg",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/v03s7j.jpg",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/evhfl1.jpg",
-				"https://files.catbox.moe/pnx17k.mp4",
-				"https://files.catbox.moe/v03s7j.jpg"
+				"https://files.catbox.moe/8066ce.mp4",
+				"https://files.catbox.moe/qsswur.jpg",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				""
 			];
 
 			const randomLink = mediaLinks[Math.floor(Math.random() * mediaLinks.length)];
