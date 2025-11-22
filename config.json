@@ -17,12 +17,12 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "61584068121936",
+    "100001403799719",
     ""
   ],
   "whiteListMode": {
     "enable": false,
-    "whiteListIds": [],
+    "whiteListIds": [100001403799719],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
   "nickNameBot": "𝗚𝗢𝗞 𝗚𝗢𝗞 𝗦+𝗧 🍷🌪️📨",
